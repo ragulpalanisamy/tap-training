@@ -1,17 +1,24 @@
-import {Form , Button } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 
-
- function SearchBar() {
+/**
+ * child component 1
+ * */
+function SearchBar(props) {
   return (
     <Form>
-        <Form.Control type="text" placeholder="Search the movies" />
-        <Button variant="primary" className= 'mt-2 m-2' type="submit">
+      <Form.Control type="text" placeholder="Search the movies" />
+      <Button variant="primary" className="mt-2 m-2" type="submit">
         Search
-    </Button>
-    <Button variant="danger" className= 'mt-2 m-2' type="submit">
-    Delete
-    </Button>
- </Form>
+      </Button>
+      <Button
+        variant="success"
+        className="mt-2 m-2"
+        type="submit"
+        onClick={props.OnClickRefresh}
+      >
+        Refresh
+      </Button>
+    </Form>
   );
 }
 
