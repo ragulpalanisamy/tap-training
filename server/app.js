@@ -5,12 +5,13 @@ const logger = require('morgan');
 const createError = require('http-errors');
 const cors = require("cors");
 
+const models = require("./models");
 const apiRoutes = require("./routes");
-const port = process.env.PORT || 4000;
+const { port, PG_URI } = process.env;
 
-const app = express();
-
-// view engine setup
+const StartServer = async ()=>{
+  const app = express();
+  // view engine setup
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
@@ -43,5 +44,13 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+}
+try{
+  StartServer();
+}
+catch(error){
+  console.log("Bootstrapping server isuess!..",error);
+}
 
 module.exports = app;
