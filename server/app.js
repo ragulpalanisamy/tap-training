@@ -5,8 +5,7 @@ const logger = require('morgan');
 const createError = require('http-errors');
 const cors = require("cors");
 
-const { movies } = require('./constant/movies');
-
+const apiRoutes = require("./routes");
 const port = process.env.PORT || 4000;
 
 const app = express();
@@ -21,9 +20,7 @@ app.get("/",(req,res)=>{
   res.send("server up and running!..");
 })
 
-app.get("/movies", (req, res) => {
-  res.json(movies);
-});
+app.use("/api", apiRoutes);
 
 
 // catch 404 and forward to error handler
