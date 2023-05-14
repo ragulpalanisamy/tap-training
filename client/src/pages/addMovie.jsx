@@ -12,5 +12,6 @@ function AddMovie() {
       </div>
     );
   }
+  
 
-  export default AddMovie;
+export default AddMovie;
