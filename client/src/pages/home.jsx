@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { Alert,Button, Card } from "react-bootstrap";
+import { Alert, Button, Card } from "react-bootstrap";
 import axios from "axios";
-//import { useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import SearchBar from "../component/searchBar";
 import Loader from "../component/loader";
@@ -11,7 +11,11 @@ const Home = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [searchText, setSearchText] = useState('');
-    //const navigator = useNavigation();
+    const navigator = useNavigate();
+
+    useEffect(() => {
+        fetchMovies();
+    }, []);
 
     const fetchMovies = async () => {
         try {
@@ -20,54 +24,47 @@ const Home = () => {
             setLoading(false);
             setMovies(response.data);
             setError(null);
-        } catch (e) {
+        }
+        catch (e) {
             setLoading(false);
             setError(`Server Error: ${e.message} ${e.stack}`);
         }
-    };
+    }
 
-    useEffect(() => {
-        fetchMovies();
-    }, []);
-
-    const onClickViewMovie= () => {
-        return (
-          <h1>Movies</h1>
-        )
+    const onClickViewMovie = ({ id }) => {
+        navigator(`/${id}`);
     }
 
     return (
         <>
             <SearchBar onClickRefresh={fetchMovies} setSearchText={setSearchText} />
             {error && <Alert variant="danger">{error}</Alert>}
-            {loading ? (
+            {loading ?
                 <Loader />
-            ) : (
-                <div className="d-flex flex-wrap justify-content-start">
-                    {movies.map((movie) => {
+                : <div className="container d-flex flex-wrap justify-content-start">
+                    {movies.map(movie => {
                         const { title, id } = movie;
 
                         return (
-                            <Card key={id} className="m-3 movie-card">
-                                <Card.Body className="text-center">
-                                    <Card.Title className="bg-#dcdcdc">{title}</Card.Title>
-                                    <Card.Text className="mw-1">
+                            <Card key={id} className="m-3 movie-card" style={{ width: '18rem' }}>
+                                <Card.Body>
+                                    <Card.Title>{title}</Card.Title>
+                                    <Card.Text>
                                         Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                                     </Card.Text>
                                     <Button
                                         variant="success"
-                                        onClick={() => onClickViewMovie(movie)}
-                                        >
+                                        onClick={() => onClickViewMovie(movie)}>
                                         View Movie
-                                    </Button> 
+                                    </Button>
                                 </Card.Body>
                             </Card>
-                        );
+                        )
                     })}
                 </div>
-            )}
+            }
         </>
-    );
-};
+    )
+}
 
 export default Home;
