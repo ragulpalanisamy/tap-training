@@ -5,7 +5,7 @@ const logger = require('morgan');
 const createError = require('http-errors');
 const cors = require('cors');
 
-const models = require("./models");
+const models = require('./models');
 const apiRoutes = require("./routes");
 
 const { PORT, PG_URI } = process.env;
@@ -51,4 +51,3 @@ try {
 catch (error) {
   console.log("Bootstrapping the app server failed!", error);
 }
-
