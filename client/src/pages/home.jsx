@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Alert, Card } from "react-bootstrap";
+import { Alert,Button, Card } from "react-bootstrap";
 import axios from "axios";
 //import { useNavigation } from "react-router-dom";
 
@@ -30,6 +30,12 @@ const Home = () => {
         fetchMovies();
     }, []);
 
+    const onClickViewMovie= () => {
+        return (
+          <h1>Movies</h1>
+        )
+    }
+
     return (
         <>
             <SearchBar onClickRefresh={fetchMovies} setSearchText={setSearchText} />
@@ -48,11 +54,12 @@ const Home = () => {
                                     <Card.Text>
                                         Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                                     </Card.Text>
-                                    {/* <Button
+                                    <Button
                                         variant="success"
-                                        onClick={() => onClickViewMovie(movie)}>
+                                        onClick={() => onClickViewMovie(movie)}
+                                        >
                                         View Movie
-                                    </Button> */}
+                                    </Button> 
                                 </Card.Body>
                             </Card>
                         );
