@@ -49,9 +49,9 @@ const Home = () => {
 
                         return (
                             <Card key={id} className="m-3 movie-card">
-                                <Card.Body>
-                                    <Card.Title>{title}</Card.Title>
-                                    <Card.Text>
+                                <Card.Body className="text-center">
+                                    <Card.Title className="bg-#dcdcdc">{title}</Card.Title>
+                                    <Card.Text className="mw-1">
                                         Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                                     </Card.Text>
                                     <Button
